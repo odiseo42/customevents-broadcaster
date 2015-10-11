@@ -63,7 +63,7 @@
     el: $('.backbony'), // el attaches to existing element
     events: {
       'click button#add': 'addItem',
-      'wiserEvent': 'listenForCustomEvents'
+      'miniAppEvent': 'listenForCustomEvents'
     },
     initialize: function(){
       _.bindAll(this, 'render', 'addItem', 'appendItem', 'listenForCustomEvents'); // every function that uses 'this' as the current object should be in here
@@ -97,7 +97,7 @@
         model: item
       });
       $('ul.backbony', this.el).append(itemView.render().el);
-      var wiserEvent = new CustomEvent("wiserEvent",
+      var miniAppEvent = new CustomEvent("miniAppEvent",
         {
           "detail":
           {
@@ -107,7 +107,7 @@
         bubbles: false
       });
 
-      $('body').broadcast(wiserEvent);
+      $('body').broadcast(miniAppEvent);
 
     },
     listenForCustomEvents: function(e){
