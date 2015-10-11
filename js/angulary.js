@@ -15,7 +15,7 @@ app.directive('editable', function() {
             $(element).bind('click', function() {
               //console.log('clicked on '+scope.field);
               // create and dispatch the event
-              var wiserEvent = new CustomEvent("wiserEvent",
+              var miniAppEvent = new CustomEvent("miniAppEvent",
                 {
                   "detail":
                   {
@@ -24,7 +24,7 @@ app.directive('editable', function() {
                   },
                 bubbles: false
               });
-              $('body').broadcast(wiserEvent);
+              $('body').broadcast(miniAppEvent);
 
               scope.$apply(scope.edit = true);
             });
@@ -40,7 +40,7 @@ app.directive('listenForCustomEvents', function() {
             scope.edit = false;
 
             var notif_area = $(element);
-            element[0].addEventListener("wiserEvent", function(e) {
+            element[0].addEventListener("miniAppEvent", function(e) {
 
               notif_area.fadeIn(1, function(){
                 notif_area.html('I heard something: ' +e.detail.eventType + ', ['+ e.detail.item+']');
@@ -48,7 +48,7 @@ app.directive('listenForCustomEvents', function() {
                 notif_area.html('');
               });
 
-              console.log("Angular Listened to wiserEvent: ", e);
+              console.log("Angular Listened to miniAppEvent: ", e);
             });
         }
     };
@@ -87,7 +87,7 @@ function Ctrl($scope) {
             checked: true
         });
 
-        var wiserEvent = new CustomEvent("wiserEvent",
+        var miniAppEvent = new CustomEvent("miniAppEvent",
           {
             "detail":
             {
@@ -97,7 +97,7 @@ function Ctrl($scope) {
             bubbles: false
 
         });
-        $('body').broadcast(wiserEvent);
+        $('body').broadcast(miniAppEvent);
 
         $scope.optionText = '';
     };
